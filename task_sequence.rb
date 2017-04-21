@@ -4,22 +4,30 @@ n = gets.to_i
 sequence = [1]
 
 n.times do 
-  temp = [] #array to store and count same elements
-  result = []
 
-  p sequence #print current sequence
-  sequence << nil #Nil element is required to finish the result
+  result = []
+    
+  repeating_number = nil
+  repeat_count = 0
 
   sequence.each do |i|
-    if temp.last == i || temp.empty?
-      temp.push(i) 
-    else 
-      result << temp.count 
-      result << temp.last
 
-      temp = [i]
+    repeating_number ||= i
+    if repeating_number == i  # || temp.empty?
+      repeat_count += 1
+    else 
+      result << repeat_count 
+      result << repeating_number
+
+      repeating_number = i
+      repeat_count = 1
     end
   end
+
+  result << repeat_count 
+  result << repeating_number
+
+  p result
 
   sequence = result
 
